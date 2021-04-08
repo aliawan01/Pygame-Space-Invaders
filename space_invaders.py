@@ -30,7 +30,6 @@ def main():
 					player_laser = Lasers(player_ship.player_x, player_ship.player_y, player_ship.PLAYER_LASER)
 					player_ship.shoot_laser(player_laser, False)
 
-
 		player_ship.player()
 		enemy_ship.enemy()
 

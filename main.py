@@ -2,12 +2,13 @@ import pygame
 from pygame.locals import *
 
 import sys
+import os
 
 class Main:
 	def __init__(self):
 
 		# File Path ------------------------------------------------
-		self.path = 'C:\\Dev\\Pygame Projects\\Space Invaders\\'
+		self.path = os.getcwd() + '\\'
 
 		# Screen Resolution ----------------------------------------
 		self.screen_x = 600

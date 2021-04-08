@@ -11,6 +11,7 @@ class Lasers(Main):
         self.laser_img = laser_img
 
         self.laser_velocity = 5
+        self.laser_cooldown = True
 
     def draw_laser(self):
         self.screen.blit(self.laser_img, (self.laser_x, self.laser_y))
@@ -36,5 +37,6 @@ class Lasers(Main):
     @property
     def get_laser_x(self):
         return self.laser_x
+
 
 
