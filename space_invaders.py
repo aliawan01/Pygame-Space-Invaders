@@ -1,9 +1,9 @@
 import pygame
 from pygame.locals import *
-
+import sys
 
 from main import *
-from new_lasers import *
+from lasers import *
 from ship import *
 
 def main():
@@ -13,9 +13,10 @@ def main():
 	old_time = pygame.time.get_ticks()
 
 	pygame.display.set_caption("Space Invaders")
+	pygame.display.set_icon(main.WINDOW_ICON)
 
-	player_ship = Ship(2, 1, main.ENEMY_BLUE_SHIP, 1)
-	enemy_ship = Ship(2, 1, main.ENEMY_BLUE_SHIP, 0)
+	player_ship = Ship(main.ENEMY_BLUE_SHIP, 1)
+	enemy_ship = Ship(main.ENEMY_BLUE_SHIP, 0)
 
 	while True:
 		main.draw_background()
@@ -29,13 +30,13 @@ def main():
 			if event.type == KEYDOWN:
 				if event.key == K_SPACE:
 					player_laser = Lasers(player_ship.player_x, player_ship.player_y, player_ship.PLAYER_LASER)
-					player_ship.shoot_laser(player_laser, False)
+					player_ship.shoot_laser(player_laser, False, enemy_ship.enemy_x, enemy_ship.enemy_y, enemy_ship.enemy_img)
 
 		player_ship.player()
 		enemy_ship.enemy()
 
 		if 'player_laser' in locals():
-			player_ship.shoot_laser(player_laser, True)
+			player_ship.shoot_laser(player_laser, True, enemy_ship.enemy_x, enemy_ship.enemy_y, enemy_ship.enemy_img)
 
 		main.update_display()
 

@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-import sys
 import os
 
 class Main:
@@ -28,6 +27,9 @@ class Main:
 		self.PLAY_AGAIN_BUTTON = pygame.image.load(self.path + 'assets\\play_again_button.png').convert_alpha()
 		self.START_BUTTON = pygame.image.load(self.path + 'assets\\start_button.png').convert_alpha()
 
+		# Window Icon ----------------------------------------------
+		self.WINDOW_ICON = pygame.image.load(self.path + 'assets\\window_icon.png').convert_alpha()
+
 		# Lasers
 		self.BLUE_LASER = pygame.image.load(self.path + 'assets\\pixel_laser_blue.png').convert_alpha()
 		self.GREEN_LASER = pygame.image.load(self.path + 'assets\\pixel_laser_green.png').convert_alpha()
@@ -45,8 +47,6 @@ class Main:
 		self.PLAYER_LASER = pygame.transform.scale(pygame.image.load(self.path + 'assets\\player_laser.png'), (50, 50)).convert_alpha()
 
 
-		self.player_x = self.screen_x // 2
-		self.player_y = self.screen_y // 1.3
 
 		# Colors ---------------------------------------------------
 		self.COLORS = {
@@ -57,12 +57,15 @@ class Main:
 			'black': (0, 0, 0)
 		}
 
+		self.ENEMY_SHIPS = {
+			'blue_ship': (self.ENEMY_BLUE_SHIP, self.BLUE_LASER),
+			'green_ship': (self.ENEMY_GREEN_SHIP, self.GREEN_LASER),
+			'red_ship': (self.ENEMY_RED_SHIP, self.RED_LASER)
+		}
+
 
 		# Game Clock Object ----------------------------------------
 		self.clock = pygame.time.Clock()
-
-		# Delta Time ----------------------------------------------
-		self.delta_time = 1/60 
 
 	def update_display(self):
 		pygame.display.update()
