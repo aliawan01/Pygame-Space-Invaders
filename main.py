@@ -61,6 +61,9 @@ class Main:
 		# Game Clock Object ----------------------------------------
 		self.clock = pygame.time.Clock()
 
+		# Delta Time ----------------------------------------------
+		self.delta_time = 1/60 
+
 	def update_display(self):
 		pygame.display.update()
 		self.clock.tick(60)

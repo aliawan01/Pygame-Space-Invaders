@@ -5,6 +5,7 @@ import random
 
 from main import *
 
+
 class Ship(Main):
     def __init__(self, ship_x, ship_y, ship_img, ship_type):
         super().__init__()
@@ -15,15 +16,16 @@ class Ship(Main):
         # Amount the enemy will move in x and y direction
         self.enemy_move_x = 2
         self.enemy_move_y = 50
-        
+
         self.enemy_off_screen = False
 
         self.laser_list = []
         self.ship_type = ship_type
+        self.old_time = pygame.time.get_ticks()
 
     def draw_enemy_ship(self):
         self.enemy_ship = self.screen.blit(self.enemy_img, (self.enemy_x, self.enemy_y))
-        self.enemy_rect = self.enemy_img.get_rect(topleft = (self.enemy_x, self.enemy_y))
+        self.enemy_rect = self.enemy_img.get_rect(topleft=(self.enemy_x, self.enemy_y))
         self.enemy_ship_movement(self.enemy_rect)
 
     def enemy_ship_movement(self, enemy_rect):
@@ -48,11 +50,11 @@ class Ship(Main):
         if pygame.Rect.colliderect(object1, object2) == True:
             print("Collision has taken place\n")
 
-
     # Drawing and adding player controls
+
     def draw_player(self):
         self.player_ship = self.screen.blit(self.PLAYER_SHIP, (self.player_x, self.player_y))
-        self.player_rect = self.PLAYER_SHIP.get_rect(topleft = (self.player_x, self.player_y))
+        self.player_rect = self.PLAYER_SHIP.get_rect(topleft=(self.player_x, self.player_y))
 
     def player_controls(self, player_move):
         key_pressed = pygame.key.get_pressed()
@@ -71,15 +73,27 @@ class Ship(Main):
         #     # self.collision(self.player_rect, self.enemy_rect)
         #     pygame.draw.line(self.screen, self.COLORS['white'], (self.player_x, self.player_y), (self.enemy_x, self.enemy_y))
 
+
+
     def shoot_laser(self, laser_instance, update_laser):
         # Only adding a new laser if the space bar is pressed
         if update_laser == False:
-            self.laser_list.append(laser_instance)
+            if len(self.laser_list) > 0:
+                # Implementing Cooldown 
+                current_time = pygame.time.get_ticks()
+                if (current_time - self.old_time) > 1000:
+                    self.laser_list.append(laser_instance)
+                    self.old_time = pygame.time.get_ticks()
+
+
+            if len(self.laser_list) == 0:
+                self.laser_list.append(laser_instance)
+
 
         for laser in self.laser_list:
             if laser.laser_y >= (-1 * (laser.laser_img.get_height())):
                 laser.laser(self.ship_type)
-                print(self.laser_list)
+                # print(self.laser_list)
 
             if laser.laser_y < (-1 * (laser.laser_img.get_height())):
                 self.laser_list.pop(self.laser_list.index(laser))

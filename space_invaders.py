@@ -10,6 +10,7 @@ def main():
 	main = Main()
 
 	pygame.init()
+	old_time = pygame.time.get_ticks()
 
 	pygame.display.set_caption("Space Invaders")
 
