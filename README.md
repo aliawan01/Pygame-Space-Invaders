@@ -64,7 +64,7 @@ Installing Pygame:
 
 OR 
 
-`pip3** install pygame`
+`pip3 install pygame`
 
 
 ## Fedora
@@ -101,7 +101,7 @@ sudo pacman -S python-pip
 
 Installing Pygame:
 
-`sudo pacman -S python-pygame `
+`sudo pacman -S python-pygame`
 
 OR 
 
