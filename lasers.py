@@ -3,6 +3,7 @@ from pygame.locals import *
 
 from main import *
 
+
 class Lasers(Main):
     def __init__(self, laser_x, laser_y, laser_img):
         super().__init__()
@@ -25,7 +26,8 @@ class Lasers(Main):
 
         if sprite == 0:
             self.laser_y += self.laser_velocity
-
+            
+    # This method runs the 2 methods above it
     def laser(self, sprite):
         self.draw_laser()
         self.move_laser(sprite)
